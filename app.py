@@ -1,8 +1,13 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import os
 
-force_df = pd.read_csv('force.csv')
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+force_csv_path = os.path.join(current_dir, 'force.csv')
+
+force_df = pd.read_csv(force_csv_path)
 force_df['year'] = pd.to_datetime(force_df['date']).dt.year
 force_df = force_df.dropna(subset=['lat','lon','hour','civ.race','civ.gender','year'], how='any')
 
